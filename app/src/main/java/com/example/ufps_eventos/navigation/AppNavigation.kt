@@ -6,10 +6,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.ufps_eventos.screens.FirstScreen
-import com.example.ufps_eventos.screens.LoginScreen
-import com.example.ufps_eventos.screens.MainScreen
-import com.example.ufps_eventos.screens.SecondScreen
+import com.example.ufps_eventos.ui.screens.FirstScreen
+import com.example.ufps_eventos.ui.screens.LoginScreen
+import com.example.ufps_eventos.ui.screens.MainScreen
+import com.example.ufps_eventos.ui.screens.SecondScreen
 
 @Composable
 fun AppNavigation(){

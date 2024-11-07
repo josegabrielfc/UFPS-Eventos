@@ -1,4 +1,4 @@
-package com.example.ufps_eventos.screens.pages
+package com.example.ufps_eventos.ui.screens.pages
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -28,7 +28,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,13 +39,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.ufps_eventos.model.Evento
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EventosPage(modifier: Modifier = Modifier) {
+fun EventsPage(navController: NavController, modifier: Modifier = Modifier) {
     var selectedGroup by remember { mutableStateOf("Grupo") }
     var showGroupDropdown by remember { mutableStateOf(false) }
     var showDatePicker by remember { mutableStateOf(false) }
@@ -120,7 +121,7 @@ fun EventosPage(modifier: Modifier = Modifier) {
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        EventListView()
+        EventListView(navController = navController)
     }
 }
 
@@ -149,7 +150,7 @@ fun generarEventos(cantidad: Int): List<Evento> {
 }
 
 @Composable
-fun EventListView() {
+fun EventListView(navController: NavController) {
 
     var currentPage by remember { mutableStateOf(1) }
     val itemsPerPage = 5
@@ -184,6 +185,9 @@ fun EventListView() {
 
         // Control de paginación
         Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { navController.navigate("event_detail_page") }) {
+            
+        }
         PaginationControl(
             currentPage = currentPage,
             totalPages = totalPages,

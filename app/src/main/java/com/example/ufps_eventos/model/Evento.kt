@@ -1,4 +1,4 @@
-package com.example.ufps_eventos.screens.pages
+package com.example.ufps_eventos.model
 
 import androidx.compose.ui.graphics.Color
 

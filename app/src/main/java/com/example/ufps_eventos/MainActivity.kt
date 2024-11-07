@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ufps_eventos.navigation.AppNavigation
-import com.example.ufps_eventos.screens.FirstScreen
+import com.example.ufps_eventos.ui.screens.FirstScreen
 import com.example.ufps_eventos.ui.theme.UFPS_EventosTheme
 
 class MainActivity : ComponentActivity() {

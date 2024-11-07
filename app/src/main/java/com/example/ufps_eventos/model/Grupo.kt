@@ -1,4 +1,4 @@
-package com.example.ufps_eventos.screens.pages
+package com.example.ufps_eventos.model
 
 data class Grupo(
     val nombre: String,

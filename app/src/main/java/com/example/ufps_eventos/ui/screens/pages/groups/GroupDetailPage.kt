@@ -1,4 +1,4 @@
-package com.example.ufps_eventos.screens.pages
+package com.example.ufps_eventos.ui.screens.pages.groups
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -39,16 +39,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.ufps_eventos.R
 
 @Composable
-fun CerrarSesionPage(modifier: Modifier = Modifier) {
-    EventDetailScreen()
+fun GroupDetailPage(navController: NavController, modifier: Modifier = Modifier) {
+    GroupDetailScreen(navController = navController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EventDetailScreen() {
+fun GroupDetailScreen(navController: NavController) {
     var isPressedBtn by remember { mutableStateOf(false) }
 
     Column(
@@ -60,7 +61,7 @@ fun EventDetailScreen() {
             title = {},
             navigationIcon = {
                 IconButton(onClick = {
-
+                    navController.popBackStack()
                 }) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                 }

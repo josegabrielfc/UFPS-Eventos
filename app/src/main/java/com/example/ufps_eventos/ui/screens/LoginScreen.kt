@@ -1,4 +1,4 @@
-package com.example.ufps_eventos.screens
+package com.example.ufps_eventos.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi

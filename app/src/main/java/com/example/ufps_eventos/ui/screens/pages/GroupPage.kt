@@ -1,4 +1,4 @@
-package com.example.ufps_eventos.screens.pages
+package com.example.ufps_eventos.ui.screens.pages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -38,17 +38,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.ufps_eventos.model.Grupo
 
 @Composable
-fun GruposPage(modifier: Modifier = Modifier) {
-    GruposPageView()
+fun GroupsPage(navController: NavController, modifier: Modifier = Modifier) {
+    GroupsPageView(navController = navController)
 }
 
 @Composable
-fun GruposPageView(modifier: Modifier = Modifier) {
+fun GroupsPageView(navController: NavController, modifier: Modifier = Modifier) {
     var selectedCategory by remember { mutableStateOf("Categorías") }
     var showCategoryDropdown by remember { mutableStateOf(false) }
     val grupos = generarGrupos(15)  // Cambia la cantidad de grupos según necesites
@@ -107,7 +107,7 @@ fun GruposPageView(modifier: Modifier = Modifier) {
         }
 
         Button(
-            onClick = { /* Acción para buscar grupos */ },
+            onClick = {  navController.navigate("crear_grupo") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
