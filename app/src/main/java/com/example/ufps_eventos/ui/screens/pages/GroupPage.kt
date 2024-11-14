@@ -1,6 +1,8 @@
 package com.example.ufps_eventos.ui.screens.pages
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,8 +40,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.ufps_eventos.R
 import com.example.ufps_eventos.model.Grupo
 
 @Composable
@@ -95,6 +101,25 @@ fun GroupsPageView(navController: NavController, modifier: Modifier = Modifier) 
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        Row(modifier = Modifier.padding(16.dp).clickable { navController.navigate("crear_grupo") }, verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                //imageVector = Icons.Default.Person,
+                painter = painterResource(id = R.drawable.creargrupo),
+                contentDescription = "Grupo Icon",
+                modifier = Modifier
+                    .size(50.dp)
+                    //.clip(CircleShape)
+                    .background(Color.Transparent)
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            // Información del grupo
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = "Crear Grupo", style = MaterialTheme.typography.titleLarge.copy(), fontSize = 16.sp,fontWeight = FontWeight.Bold)
+            }
+        }
+
         // Lista de grupos
         LazyColumn(
             modifier = Modifier
@@ -107,23 +132,39 @@ fun GroupsPageView(navController: NavController, modifier: Modifier = Modifier) 
         }
 
         Button(
-            onClick = {  navController.navigate("crear_grupo") },
+            onClick = {  navController.navigate("detalle_grupo") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
         ) {
             Text(text = "Buscar Grupos")
         }
+        Button(
+            onClick = {  navController.navigate("miembros_grupo") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+        ) {
+            Text(text = "Ver miembros")
+        }
+        Button(
+            onClick = {  navController.navigate("miembros_grupo_admin") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+        ) {
+            Text(text = "Eliminar miembros")
+        }
 
         // Control de paginación
         Spacer(modifier = Modifier.height(8.dp))
-        PaginationGroupControl(
+        PaginationControl(
             currentPage = currentPage,
             totalPages = totalPages,
             onPreviousPage = { if (currentPage > 1) currentPage-- },
             onNextPage = { if (currentPage < totalPages) currentPage++ }
         )
-        Spacer(modifier = Modifier.height(60.dp))
+        //Spacer(modifier = Modifier.height(50.dp))
     }
 }
 
@@ -170,35 +211,5 @@ fun generarGrupos(cantidad: Int): List<Grupo> {
             nombre = nombres[i % nombres.size],
             descripcion = descripciones[i % descripciones.size]
         )
-    }
-}
-
-@Composable
-fun PaginationGroupControl(
-    currentPage: Int,
-    totalPages: Int,
-    onPreviousPage: () -> Unit,
-    onNextPage: () -> Unit
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        IconButton(
-            onClick = onPreviousPage,
-            enabled = currentPage > 1
-        ) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Página anterior")
-        }
-
-        Text(text = "$currentPage / $totalPages")
-
-        IconButton(
-            onClick = onNextPage,
-            enabled = currentPage < totalPages
-        ) {
-            Icon(Icons.Default.ArrowForward, contentDescription = "Página siguiente")
-        }
     }
 }

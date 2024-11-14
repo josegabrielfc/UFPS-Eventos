@@ -195,7 +195,7 @@ fun EventListView(navController: NavController) {
             onNextPage = { if (currentPage < totalPages) currentPage++ }
         )
 
-        Spacer(modifier = Modifier.height(65.dp))
+        //Spacer(modifier = Modifier.height(65.dp))
     }
 }
 
@@ -236,32 +236,3 @@ fun EventCard(evento: Evento) {
     }
 }
 
-@Composable
-fun PaginationControl(
-    currentPage: Int,
-    totalPages: Int,
-    onPreviousPage: () -> Unit,
-    onNextPage: () -> Unit
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        IconButton(
-            onClick = onPreviousPage,
-            enabled = currentPage > 1 // Deshabilitar si estamos en la primera página
-        ) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Página anterior")
-        }
-
-        Text(text = "$currentPage / $totalPages")
-
-        IconButton(
-            onClick = onNextPage,
-            enabled = currentPage < totalPages // Deshabilitar si estamos en la última página
-        ) {
-            Icon(Icons.Default.ArrowForward, contentDescription = "Página siguiente")
-        }
-    }
-}

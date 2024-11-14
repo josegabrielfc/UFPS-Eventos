@@ -28,7 +28,10 @@ import com.example.ufps_eventos.ui.screens.pages.EventsPage
 import com.example.ufps_eventos.ui.screens.pages.GroupsPage
 import com.example.ufps_eventos.ui.screens.pages.CerrarSesionPage
 import com.example.ufps_eventos.ui.screens.pages.events.EventDetailPage
+import com.example.ufps_eventos.ui.screens.pages.groups.GroupCreatePage
 import com.example.ufps_eventos.ui.screens.pages.groups.GroupDetailPage
+import com.example.ufps_eventos.ui.screens.pages.groups.GroupMembersPage
+import com.example.ufps_eventos.ui.screens.pages.groups.admin.GroupMembersAdminPage
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,7 +63,10 @@ fun MainScreen(navController: NavController, modifier: Modifier = Modifier) {
             composable("grupos") { GroupsPage(internalNavController) }
             composable("eventos") { EventsPage(internalNavController) }
             composable("cerrar_sesion") { CerrarSesionPage(internalNavController) }
-            composable("crear_grupo"){ GroupDetailPage(internalNavController) }
+            composable("crear_grupo"){ GroupCreatePage(internalNavController) }
+            composable("detalle_grupo"){ GroupDetailPage(internalNavController) }
+            composable("miembros_grupo"){ GroupMembersPage(internalNavController) }
+            composable("miembros_grupo_admin"){ GroupMembersAdminPage(internalNavController) }
             composable("event_detail_page"){ EventDetailPage(internalNavController) }
         }
     }

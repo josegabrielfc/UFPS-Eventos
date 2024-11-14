@@ -41,6 +41,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ufps_eventos.R
+import androidx.compose.material3.*
+import androidx.compose.foundation.layout.*
 
 @Composable
 fun GroupDetailPage(navController: NavController, modifier: Modifier = Modifier) {
@@ -49,13 +51,21 @@ fun GroupDetailPage(navController: NavController, modifier: Modifier = Modifier)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GroupDetailScreen(navController: NavController) {
-    var isPressedBtn by remember { mutableStateOf(false) }
-
+fun GroupDetailScreen(navController: NavController,
+    groupName: String = "100 años en la B",
+    adminName: String = "Josep Guardiola | Sala",
+    description: String = "Bienvenidos todos, este es un grupo enfocado a debatir sobre la situación actual del equipo...",
+    categories: List<Pair<String, Color>> = listOf(
+        "Académico" to Color(0xFFF3B5A8),
+        "Fútbol" to Color(0xFF88CDF6),
+        "Debate" to Color(0xFFF5BBF5)
+    ),
+    onLeaveGroup: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF3F9FA))
+            .padding(16.dp)
     ) {
         TopAppBar(
             title = {},
@@ -68,107 +78,95 @@ fun GroupDetailScreen(navController: NavController) {
             },
             modifier = Modifier.background(Color(0xFFF3F9FA))
         )
+        Text(
+            text = groupName,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
 
-        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-            Text(
-                text = "Nombre del evento",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 8.dp)
-            )
-            Text(
-                text = "Nombre del Grupo",
-                fontSize = 14.sp,
-                color = Color.Gray
-            )
+        Image(
+            painter = painterResource(id = R.drawable.google_logo), // Cambia esta URL a la imagen del grupo
+            contentDescription = null,
+            modifier = Modifier
+                .size(100.dp)
+                .align(Alignment.CenterHorizontally),
+            contentScale = ContentScale.Crop
+        )
 
-            Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
+        // Categorías
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            categories.forEach { (category, color) ->
                 Text(
-                    text = "Jun 10, 2024",
+                    text = category,
+                    color = Color.White,
+                    fontSize = 12.sp,
                     modifier = Modifier
-                        .background(Color(0xFFEBE5E5), shape = CircleShape)
-                        .padding(8.dp),
-                    color = Color.Black
-                )
-                Text(
-                    text = "9:41 AM",
-                    modifier = Modifier
-                        .background(Color(0xFFEBE5E5), shape = CircleShape)
-                        .padding(8.dp),
-                    color = Color.Black
+                        .background(color, RoundedCornerShape(16.dp))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                        .padding(end = 8.dp)
                 )
             }
+        }
 
-            Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .background(Color(0xFFEBE5E5), shape = CircleShape)
-                    .padding(8.dp)
-            ) {
-                Icon(Icons.Default.Place, contentDescription = "Location", tint = Color.Gray)
-                Spacer(modifier = Modifier.width(4.dp))
+        // Admin del grupo
+        Text(
+            text = adminName,
+            fontWeight = FontWeight.Medium,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .background(
+                    color = Color(0xFFE0E0E0),
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .padding(16.dp)
+        ){
+        // Descripción
+            Column {
                 Text(
-                    text = "Parque Simon Bolivar",
+                    text = "Descripción: ",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = description,
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+        }
 
-            Image(
-                painter = painterResource(id = R.drawable.google_logo), // Asegúrate de que el recurso de imagen exista
-                contentDescription = "Event image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(250.dp),
-                contentScale = ContentScale.Crop
-            )
+        Spacer(modifier = Modifier.height(16.dp))
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = { /* Acción de inscripción */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                shape = RoundedCornerShape(10.dp)
-                /*colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6D4DDC),
-                    contentColor = Color.White
-                )*/
-            ) {
-                Text(text = "Inscribirse")
-            }
-            Button(
-                onClick = { isPressedBtn = !isPressedBtn },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isPressedBtn) Color.White else MaterialTheme.colorScheme.primary,
-                    contentColor = if (isPressedBtn) MaterialTheme.colorScheme.primary else Color.White
-                ),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
-            ) {
-                Text(text = "Inscribirse")
-            }
-
+        // Botón "Salir del Grupo"
+        Button(
+            onClick = onLeaveGroup,
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
+            Text("Salir del Grupo", color = Color.White)
         }
     }
 }
