@@ -156,6 +156,24 @@ fun GroupsPageView(navController: NavController, modifier: Modifier = Modifier) 
             Text(text = "Eliminar miembros")
         }
 
+        Button(
+            onClick = {  navController.navigate("editar_detalles_grupo") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+        ) {
+            Text(text = "Editar Detalles Grupo")
+        }
+
+        Button(
+            onClick = {  navController.navigate("editar_grupo") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+        ) {
+            Text(text = "Editar Grupo")
+        }
+
         // Control de paginación
         Spacer(modifier = Modifier.height(8.dp))
         PaginationControl(

@@ -43,21 +43,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ufps_eventos.R
+import com.example.ufps_eventos.model.Evento
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun EventDetailPage(navController: NavController, modifier: Modifier = Modifier) {
+fun EventDetailPage(evento: Evento, navController: NavController, modifier: Modifier = Modifier) {
     Scaffold (
 
     ){
-        EventDetailScreen(navController = navController)
+        EventDetailScreen(evento = evento ,navController = navController)
     }
 
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EventDetailScreen(navController: NavController) {
+fun EventDetailScreen(evento: Evento, navController: NavController) {
     var isPressedBtn by remember { mutableStateOf(false) }
 
     Column(
@@ -79,7 +80,7 @@ fun EventDetailScreen(navController: NavController) {
 
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(
-                text = "Nombre del evento",
+                text = evento.title,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 8.dp)
@@ -96,7 +97,7 @@ fun EventDetailScreen(navController: NavController) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = "Jun 10, 2024",
+                    text = evento.date,
                     modifier = Modifier
                         .background(Color(0xFFEBE5E5), shape = CircleShape)
                         .padding(8.dp),
@@ -142,7 +143,7 @@ fun EventDetailScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                text = evento.description,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )

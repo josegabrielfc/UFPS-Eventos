@@ -1,5 +1,6 @@
 package com.example.ufps_eventos.ui.screens.pages
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -41,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.ufps_eventos.model.Evento
+import com.google.gson.Gson
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -156,15 +158,7 @@ fun EventListView(navController: NavController) {
     val itemsPerPage = 5
 
     val events = generarEventos(15)
-    /*val events = listOf(
-        Evento("Evento 1", "Descripción del evento", "13/11/2024", "15 / 35", Color(0xFFFFD700)),
-        Evento("Evento 2", "Descripción del evento 2", "14/11/2024", "19 / 35", Color(0xFFFF6347)),
-        Evento("Evento 3", "Descripción del evento 3", "14/11/2024", "20 / 35", Color(0xFFFF6347)),
-        Evento("Evento 4", "Descripción del evento 4", "14/11/2024", "19 / 35", Color(0xFFFF6347)),
-        Evento("Evento 5", "Descripción del evento 5", "14/11/2024", "20 / 35", Color(0xFFFF6347)),
-        Evento("Evento 6", "Descripción del evento 6", "14/11/2024", "19 / 35", Color(0xFFFF6347)),
-        Evento("Evento 7", "Descripción del evento 7", "14/11/2024", "20 / 35", Color(0xFFFF6347))
-    )*/
+
     val totalPages = (events.size + itemsPerPage - 1) / itemsPerPage
 
     // Eventos de la página actual
@@ -179,15 +173,16 @@ fun EventListView(navController: NavController) {
                 .fillMaxWidth()
         ) {
             items(paginatedEvents) { event ->
-                EventCard(event)
+                EventCard(event, navController)
             }
         }
 
         // Control de paginación
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { navController.navigate("event_detail_page") }) {
-            
-        }
+        /*Button(onClick = { navController.navigate("event_detail_page") }
+        ) {
+            Text(text = "EVENTO")
+        }*/
         PaginationControl(
             currentPage = currentPage,
             totalPages = totalPages,
@@ -200,7 +195,7 @@ fun EventListView(navController: NavController) {
 }
 
 @Composable
-fun EventCard(evento: Evento) {
+fun EventCard(evento: Evento, navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -226,7 +221,12 @@ fun EventCard(evento: Evento) {
                 )
 
                 Button(
-                    onClick = { /* Acción para "Ver más" */ },
+                    onClick = {
+                        val eventoJson = Uri.encode(
+                            Gson().toJson(evento)
+                        ) // Serializamos el objeto
+                        navController.navigate("event_detail_page/$eventoJson")
+                    },
                     modifier = Modifier.padding(start = 8.dp)
                 ) {
                     Text(text = "Ver más")
