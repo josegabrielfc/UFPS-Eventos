@@ -35,6 +35,7 @@ import com.example.ufps_eventos.ui.screens.pages.events.EventDetailPage
 import com.example.ufps_eventos.ui.screens.pages.groups.GroupCreatePage
 import com.example.ufps_eventos.ui.screens.pages.groups.GroupDetailPage
 import com.example.ufps_eventos.ui.screens.pages.groups.GroupMembersPage
+import com.example.ufps_eventos.ui.screens.pages.groups.GroupSubscribePage
 import com.example.ufps_eventos.ui.screens.pages.groups.admin.GroupAdminDetailPage
 import com.example.ufps_eventos.ui.screens.pages.groups.admin.GroupEditPage
 import com.example.ufps_eventos.ui.screens.pages.groups.admin.GroupMembersAdminPage
@@ -75,6 +76,7 @@ fun MainScreen(navController: NavController, modifier: Modifier = Modifier) {
             composable("editar_grupo"){ GroupEditPage(internalNavController) }
             composable("editar_detalles_grupo"){ GroupAdminDetailPage(internalNavController) }
             composable("detalle_grupo"){ GroupDetailPage(internalNavController) }
+            composable("suscribirse_grupo"){ GroupSubscribePage(internalNavController) }
             composable("miembros_grupo"){ GroupMembersPage(internalNavController) }
             composable("miembros_grupo_admin"){ GroupMembersAdminPage(internalNavController) }
             composable(

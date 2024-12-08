@@ -132,12 +132,20 @@ fun GroupsPageView(navController: NavController, modifier: Modifier = Modifier) 
         }
 
         Button(
+            onClick = {  navController.navigate("suscribirse_grupo") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+        ) {
+            Text(text = "Suscribirse al Grupo")
+        }
+        Button(
             onClick = {  navController.navigate("detalle_grupo") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
         ) {
-            Text(text = "Buscar Grupos")
+            Text(text = "Salir del Grupo")
         }
         Button(
             onClick = {  navController.navigate("miembros_grupo") },
